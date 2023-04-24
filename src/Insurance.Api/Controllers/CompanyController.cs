@@ -51,5 +51,12 @@ namespace Insurance.Api.Controllers
             return Ok(company);
         }
 
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete([FromRoute] long id)
+        {
+            var company = await _mediator.Send(new DeleteCompanyByIdCommand() { Id = id });
+
+            return Ok();
+        }
     }
 }
