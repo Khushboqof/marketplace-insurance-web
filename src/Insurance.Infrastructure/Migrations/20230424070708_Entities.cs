@@ -7,7 +7,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Insurance.Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class firstMig : Migration
+    public partial class Entities : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
