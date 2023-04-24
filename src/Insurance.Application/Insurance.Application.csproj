@@ -17,8 +17,4 @@
     <ProjectReference Include="..\Insurance.Domain\Insurance.Domain.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="UseCases\Admin\Queries\" />
-  </ItemGroup>
-
 </Project>
