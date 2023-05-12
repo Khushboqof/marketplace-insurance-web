@@ -14,12 +14,11 @@ namespace Insurance.Application.UseCases.Admin.Commands
     public class UpdateCompanyCommand : ICommand<Unit>
     {
         public long Id { get; set; }
-        public string Name { get; set; } 
-        public string Description { get; set; }
-        public string Address { get; set; } 
-        public string Email { get; set; } 
-        public string Phone { get; set; }
-        public DateTime CreatedAt { get; set; }
+        public string? Name { get; set; } 
+        public string? Description { get; set; }
+        public string? Address { get; set; } 
+        public string? Email { get; set; } 
+        public string? Phone { get; set; }       
     }
 
     public class UpdateCompanyCommandHandler : ICommandHandler<UpdateCompanyCommand, Unit>
@@ -35,17 +34,16 @@ namespace Insurance.Application.UseCases.Admin.Commands
         {
             var company = await _context.Companys.FirstOrDefaultAsync(x => x.Id == request.Id, cancellationToken);
 
-            if(company == null)
+            if (company == null)
             {
                 throw new CompanyNotFoundException();
             }
 
-            company.Name = request.Name ?? company.Name;
-            company.Description = request.Description ?? company.Description;
-            company.Address = request.Address ?? company.Address;
-            company.Email = request.Email ?? company.Email;
-            company.Phone = request.Phone ?? company.Phone;
-            company.CreatedAt = request.CreatedAt;
+            company.Name = String.IsNullOrEmpty(request.Name) ? company.Name : request.Name;
+            company.Description = String.IsNullOrEmpty(request.Description) ? company.Description :  request.Description;
+            company.Address = String.IsNullOrEmpty(request.Address) ? company.Address : request.Address;
+            company.Email = String.IsNullOrEmpty(request.Email) ? company.Email : request.Email;
+            company.Phone = String.IsNullOrEmpty(request.Phone) ? company.Phone : request.Phone;            
 
             _context.Companys.Update(company);
             await _context.SaveChangesAsync(cancellationToken);
